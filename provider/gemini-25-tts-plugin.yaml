@@ -1,0 +1,15 @@
+identity:
+  author: tomy-kyu
+  name: gemini-25-tts-plugin
+  label:
+    en_US: gemini-25-tts-plugin
+    ja_JP: gemini-25-tts-plugin
+  description:
+    en_US: Gemini 2.5 Flash TTS Multi-speaker audio
+    ja_JP: Gemini 2.5 Flash TTS  を使用して2人対話音声ファイルを出力します。
+  icon: waza.jpg
+tools:
+  - tools/gemini-25-tts-plugin.yaml
+extra:
+  python:
+    source: provider/gemini-25-tts-plugin.py

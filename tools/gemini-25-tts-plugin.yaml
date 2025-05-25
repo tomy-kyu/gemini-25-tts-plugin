@@ -1,0 +1,49 @@
+identity:
+  name: gemini-25-tts-plugin
+  author: tomy-kyu
+  label:
+    en_US: gemini-25-tts-plugin
+    ja_JP: gemini-25-tts-plugin
+description:
+  human:
+    en_US: Gemini 2.5 Flash TTS Multi-speaker audio
+    ja_JP: Gemini 2.5 Flash TTS Multi-speaker audio
+  llm: Gemini 2.5 Flash TTS Multi-speaker audio
+parameters:
+  - name: api_key
+    type: secret-input
+    required: true
+    label:
+      en_US: Gemini API Key
+      ja_JP: Gemini APIのAPI-Key
+    human_description:
+      en_US: Please enter your API key.
+      ja_JP: APIキーを入力してください。
+    llm_description: Please enter your API key.
+    form: llm
+  - name: scenario_data
+    type: string
+    required: true
+    label:
+      en_US: Scenario text data for multi-speaker audio .
+      ja_JP: マルチスピーカーオーディオ生成に必要となる対話テキストデータ。
+    human_description:
+      en_US: Describe conversations line by line. 
+      ja_JP: 行単位で会話を記述します。
+    llm_description: Scenario text data for multi-speaker audio .
+    form: llm
+  - name: temperature
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Temperature sampling parameters
+      ja_JP: 温度サンプリングパラメータ
+    human_description:
+      en_US: Temperature sampling parameters
+      ja_JP: Temperature sampling parameters
+    llm_description: Temperature sampling parameters
+    form: llm
+extra:
+  python:
+    source: tools/gemini-25-tts-plugin.py
