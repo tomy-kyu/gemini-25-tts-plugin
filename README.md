@@ -20,9 +20,9 @@ Gemini 2.5 TTSモデルを使ってNotebook LMっぽい感じの対話音声デ�
     * 私の場合、このセリフデータの出力はGemini 2.5 Pro Preview 05-06に実行させていたりします。
   * temperature 温度サンプリング値です。1.0でもよさげな気がします。Constantで設定をお願いします。
 
-* 出力
- * text string 不具合が起きた時、エラーメッセージはこちらに出力されます。
- * files array/(file) wavファイルが出力されます。Google AI Studioで出力されるものと同じ仕様です。
+* 出力値
+  * text string 不具合が起きた時、エラーメッセージはこちらに出力されます。
+  * files array/(file) wavファイルが出力されます。Google AI Studioで出力されるものと同じ仕様です。
 
 ### 処理時間の目安
 
