@@ -1,7 +1,7 @@
 ## Dify Plugin for Google Gemini 2.5 Flash TTS 
 
 **Author:** tomy-kyu
-**Version:** 0.0.1
+**Version:** 0.0.2
 **Type:** tool
 
 ### Description
@@ -9,7 +9,6 @@
 Gemini 2.5 TTSモデルを使ってNotebook LMっぽい感じの対話音声データを生成するプラグインです。やっつけで作ったのでだいぶ作りは微妙です。
 
 * DifyでGemini 2.5 TTSの対話Wavファイルを出力するための処理を作成しました。
-  * 使用するモデルはGemini 2.5 Flash TTSで固定しています。
   * 出力形式はwavファイル形式一択です。これはGemini APIで出力する仕様に合わせています。
   * 使用するAPIはGemini APIを想定しています。VertexAIは想定していません。
   * まだプロンプトとして展開する際の制約等がハッキリわかっておらず、場合によっては時間がかかったり、短時間の対話なのに10分無音区間が設定された状態でデータ生成されるなど弱点がありますのでご注意ください。
@@ -19,6 +18,9 @@ Gemini 2.5 TTSモデルを使ってNotebook LMっぽい感じの対話音声デ�
   * senario-data 所定フォーマットに沿ったSpeaker 1 とSpeaker 2のセリフデータを入力してください。
     * 私の場合、このセリフデータの出力はGemini 2.5 Pro Preview 05-06に実行させていたりします。
   * temperature 温度サンプリング値です。1.0でもよさげな気がします。Constantで設定をお願いします。
+  * model 使用するTTSモデルです。2種類から選択します。
+  * speaker-1 話者1（司会者役割を持つ人)の声を指定します。30種類の声から選択できます。
+  * speaker-2 話者2（回答者役割を持つ人）の声を指定します。リストはSpeaker-1と同じです。
 
 * 出力値
   * text string 不具合が起きた時、エラーメッセージはこちらに出力されます。

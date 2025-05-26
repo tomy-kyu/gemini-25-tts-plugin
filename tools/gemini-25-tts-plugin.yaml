@@ -14,8 +14,8 @@ parameters:
     type: secret-input
     required: true
     label:
-      en_US: Gemini API Key
-      ja_JP: Gemini APIのAPI-Key
+      en_US: api_key
+      ja_JP: api_key
     human_description:
       en_US: Please enter your API key.
       ja_JP: APIキーを入力してください。
@@ -25,11 +25,11 @@ parameters:
     type: string
     required: true
     label:
-      en_US: Scenario text data for multi-speaker audio .
-      ja_JP: マルチスピーカーオーディオ生成に必要となる対話テキストデータ。
+      en_US: scenario_data
+      ja_JP: scenario_data
     human_description:
       en_US: Describe conversations line by line. 
-      ja_JP: 行単位で会話を記述します。
+      ja_JP: 行単位で会話を記述します。会話内容をフォーマットに従い記述します。
     llm_description: Scenario text data for multi-speaker audio .
     form: llm
   - name: temperature
@@ -37,12 +37,299 @@ parameters:
     required: false
     default: 1
     label:
-      en_US: Temperature sampling parameters
-      ja_JP: 温度サンプリングパラメータ
+      en_US: temperature
+      ja_JP: temperature
     human_description:
       en_US: Temperature sampling parameters
-      ja_JP: Temperature sampling parameters
+      ja_JP: 温度サンプリング値
     llm_description: Temperature sampling parameters
+    form: llm
+  - name: model
+    type: select
+    required: true
+    default: gemini-2.5-flash-tts
+    label:
+      en_US: model
+      ja_JP: model
+    human_description:
+      en_US: select TTS models
+      ja_JP: TTSモデルを選択してください。
+    llm_description: select TTS models
+    options:
+      - value: gemini-2.5-flash-preview-tts
+        label:
+          en_US: Gemini 2.5 Flash Preview TTS
+          ja_JP: Gemini 2.5 Flash Preview TTS
+      - value: gemini-2.5-pro-preview-tts
+        label:
+          en_US: Gemini 2.5 Pro Preview TTS
+          ja_JP: Gemini 2.5 Pro Preview TTS
+    form: llm
+  - name: speaker-1
+    type: select
+    required: true
+    default: Zephyr
+    label:
+      en_US: Speaker-1
+      ja_JP: 話者1
+    human_description:
+      en_US: Select to Speaker model.
+      ja_JP: 話者モデルを選択してください。
+    llm_description: select to speaker model.
+    options:
+      - value: Zephyr
+        label:
+          en_US: Bright voice - woman
+          ja_JP: 明るい声 - 女性
+      - value: Kore
+        label:
+          en_US: Firm voice - woman
+          ja_JP: 力強い声 - 女性
+      - value: Leda
+        label:
+          en_US: Youthful voice - woman
+          ja_JP: 若々しい声 - 女性
+      - value: Aoede
+        label:
+          en_US: Breezy voice - woman
+          ja_JP: 爽やかな声 - 女性
+      - value: Callirhoe
+        label:
+          en_US: Easy-going voice - woman
+          ja_JP: 気楽な声 - woman
+      - value: Autonoe
+        label:
+          en_US: Bright voice - woman
+          ja_JP: 明るい声 - woman
+      - value: Despina
+        label:
+          en_US: Smooth  voice - woman
+          ja_JP: 滑らかな声 - woman
+      - value: Erinome
+        label:
+          en_US: Clear voice - woman
+          ja_JP: クリアな声 - woman
+      - value: Laomedeia
+        label:
+          en_US: Upbeat voice - woman
+          ja_JP: 明るい声 - 女性
+      - value: Archernar
+        label:
+          en_US: Soft voice - woman
+          ja_JP: 柔らかい声 - 女性
+      - value: Gacrux
+        label:
+          en_US: Mature voice - woman
+          ja_JP: 成熟した声 - 女性
+      - value: Vindemiatrix
+        label:
+          en_US: Gentle voice - woman
+          ja_JP: 優しい声 - 女性
+      - value: Sulafar
+        label:
+          en_US: Warm voice - woman
+          ja_JP: 温かい声 - 女性
+      - value: Puck
+        label:
+          en_US: Upbeat voice - man
+          ja_JP: 明るい声 - 男性
+      - value: Charon
+        label:
+          en_US: Informative voice - man
+          ja_JP:  情報的な声 - man
+      - value: Fenrir
+        label:
+          en_US: Excitable voice - man
+          ja_JP: 興奮しやすい声 - man
+      - value: Orus
+        label:
+          en_US: Firm voice - man
+          ja_JP:  堅い声 - man
+      - value: Enceladus
+        label:
+          en_US: Breathy voice - man
+          ja_JP: 呼吸の荒い声 - man
+      - value: Iapetus
+        label:
+          en_US: Clear voice - man
+          ja_JP: クリアな声 - man
+      - value: Umbriel
+        label:
+          en_US: Easy-going voice - man
+          ja_JP: 気楽な声 - man
+      - value: Algieba
+        label:
+          en_US: Smooth voice - man
+          ja_JP: 滑らかな声 - man
+      - value: Algenib
+        label:
+          en_US: Gravelly voice - man
+          ja_JP: 粗い声 - man
+      - value: Rasalgethi
+        label:
+          en_US: Informative voice - man
+          ja_JP: 情報豊富な声 - man
+      - value: Alnilam
+        label:
+          en_US: Firm voice - man
+          ja_JP: 力強い声 - man
+      - value: Schedar
+        label:
+          en_US: Even voice - man
+          ja_JP: 均一な声 - man
+      - value: Pulcherima
+        label:
+          en_US: Forward voice - man
+          ja_JP: 積極的な声 - man
+      - value: Achird
+        label:
+          en_US: Friendly
+          ja_JP: フレンドリー - man
+      - value: Zubenelgenubi
+        label:
+          en_US: Casual voice - man
+          ja_JP: カジュアルな声 - man
+      - value: Sadachbia
+        label:
+          en_US: Lively voice - man
+          ja_JP: 活気のある声 - manj
+      - value: Sadaltager
+        label:
+          en_US: Knowledgeable voice - man
+          ja_JP: 知識人的声 - man
+    form: llm
+  - name: speaker-2
+    type: select
+    required: true
+    default: Gacrux
+    label:
+      en_US: Speaker-2
+      ja_JP: 話者2
+    human_description:
+      en_US: Select to Speaker model.
+      ja_JP: 話者モデルを選択してください。
+    llm_description: select to speaker model.
+    options:
+      - value: Zephyr
+        label:
+          en_US: Bright voice - woman
+          ja_JP: 明るい声 - 女性
+      - value: Kore
+        label:
+          en_US: Firm voice - woman
+          ja_JP: 力強い声 - 女性
+      - value: Leda
+        label:
+          en_US: Youthful voice - woman
+          ja_JP: 若々しい声 - 女性
+      - value: Aoede
+        label:
+          en_US: Breezy voice - woman
+          ja_JP: 爽やかな声 - 女性
+      - value: Callirhoe
+        label:
+          en_US: Easy-going voice - woman
+          ja_JP: 気楽な声 - woman
+      - value: Autonoe
+        label:
+          en_US: Bright voice - woman
+          ja_JP: 明るい声 - woman
+      - value: Despina
+        label:
+          en_US: Smooth  voice - woman
+          ja_JP: 滑らかな声 - woman
+      - value: Erinome
+        label:
+          en_US: Clear voice - woman
+          ja_JP: クリアな声 - woman
+      - value: Laomedeia
+        label:
+          en_US: Upbeat voice - woman
+          ja_JP: 明るい声 - 女性
+      - value: Archernar
+        label:
+          en_US: Soft voice - woman
+          ja_JP: 柔らかい声 - 女性
+      - value: Gacrux
+        label:
+          en_US: Mature voice - woman
+          ja_JP: 成熟した声 - 女性
+      - value: Vindemiatrix
+        label:
+          en_US: Gentle voice - woman
+          ja_JP: 優しい声 - 女性
+      - value: Sulafar
+        label:
+          en_US: Warm voice - woman
+          ja_JP: 温かい声 - 女性
+      - value: Puck
+        label:
+          en_US: Upbeat voice - man
+          ja_JP: 明るい声 - 男性
+      - value: Charon
+        label:
+          en_US: Informative voice - man
+          ja_JP:  情報的な声 - man
+      - value: Fenrir
+        label:
+          en_US: Excitable voice - man
+          ja_JP: 興奮しやすい声 - man
+      - value: Orus
+        label:
+          en_US: Firm voice - man
+          ja_JP:  堅い声 - man
+      - value: Enceladus
+        label:
+          en_US: Breathy voice - man
+          ja_JP: 呼吸の荒い声 - man
+      - value: Iapetus
+        label:
+          en_US: Clear voice - man
+          ja_JP: クリアな声 - man
+      - value: Umbriel
+        label:
+          en_US: Easy-going voice - man
+          ja_JP: 気楽な声 - man
+      - value: Algieba
+        label:
+          en_US: Smooth voice - man
+          ja_JP: 滑らかな声 - man
+      - value: Algenib
+        label:
+          en_US: Gravelly voice - man
+          ja_JP: 粗い声 - man
+      - value: Rasalgethi
+        label:
+          en_US: Informative voice - man
+          ja_JP: 情報豊富な声 - man
+      - value: Alnilam
+        label:
+          en_US: Firm voice - man
+          ja_JP: 力強い声 - man
+      - value: Schedar
+        label:
+          en_US: Even voice - man
+          ja_JP: 均一な声 - man
+      - value: Pulcherima
+        label:
+          en_US: Forward voice - man
+          ja_JP: 積極的な声 - man
+      - value: Achird
+        label:
+          en_US: Friendly
+          ja_JP: フレンドリー - man
+      - value: Zubenelgenubi
+        label:
+          en_US: Casual voice - man
+          ja_JP: カジュアルな声 - man
+      - value: Sadachbia
+        label:
+          en_US: Lively voice - man
+          ja_JP: 活気のある声 - manj
+      - value: Sadaltager
+        label:
+          en_US: Knowledgeable voice - man
+          ja_JP: 知識人的声 - man
     form: llm
 extra:
   python:

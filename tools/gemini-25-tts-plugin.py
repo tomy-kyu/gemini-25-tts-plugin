@@ -18,7 +18,21 @@ class Gemini25TtsPluginTool(Tool):
 
         api_key = tool_parameters.get("api_key")
         if not api_key:
-            yield self.create_text_message("エラー: GEMINI_API_KEY が設定されていません。Difyのクレデンシャル管理で設定してください。")
+            yield self.create_text_message("エラー: GEMINI_API_KEY が設定されていません。Difyの設定を確認してください。")
+            return
+
+        tts_model = tool_parameters.get("model")
+        if not tts_model:
+            yield self.create_text_message("エラー: GEMINI_MODEL が設定されていません。Difyの設定を確認してください。")
+            return
+
+        speaker_1 = tool_parameters.get("speaker-1")
+        if not speaker_1:
+            yield self.create_text_message("エラー: 話者1 が設定されていません。")
+            return
+        speaker_2 = tool_parameters.get("speaker-2")
+        if not speaker_2:
+            yield self.create_text_message("エラー: 話者2 が設定されていません。")
             return
 
         scenario_data = tool_parameters.get("scenario_data", "")
@@ -85,7 +99,7 @@ class Gemini25TtsPluginTool(Tool):
             yield self.create_text_message(f"エラー: Gemini TTS サービスで予期せぬ問題が発生しました: {str(e)}")
 
     def _generate_gemini_tts(
-        self, api_key: str, text_input: str, temperature: float
+            self, api_key: str, text_input: str, temperature: float, tts_model: str, speaker_1: str, speaker_2: str
     ) -> tuple[bytes | None, str | None]:
         """
         Generates speech using the Gemini API, strictly following the structure
@@ -104,7 +118,7 @@ class Gemini25TtsPluginTool(Tool):
 
         # 2. Define Model Name
         #model_name = "gemini-2.5-pro-preview-tts" # As specified in the original script
-        model_name = "gemini-2.5-flash-preview-tts"
+        model_name = tts_model
         #print(text_input)
         # 3. Prepare Contents (as per original script)
         try:
@@ -129,13 +143,13 @@ class Gemini25TtsPluginTool(Tool):
                         types.SpeakerVoiceConfig(
                             speaker="Speaker 1",
                             voice_config=types.VoiceConfig(
-                                prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Zephyr")
+                                prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=speaker_1)
                             )
                         ),
                         types.SpeakerVoiceConfig(
                             speaker="Speaker 2",
                             voice_config=types.VoiceConfig(
-                                prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Gacrux")
+                                prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=speaker_2)
                             )
                         ),
                     ]
