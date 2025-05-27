@@ -35,7 +35,7 @@ class Gemini25TtsPluginTool(Tool):
             yield self.create_text_message("エラー: 話者2 が設定されていません。")
             return
 
-        scenario_data = tool_parameters.get("scenario_data", "")
+        scenario_data = tool_parameters.get("scenario_data")
         if not scenario_data:
             yield self.create_text_message("エラー: パラメータ 'scenario_data' (対話データ) が必要です。")
             return
@@ -54,6 +54,9 @@ class Gemini25TtsPluginTool(Tool):
             audio_data_bytes, mime_type_from_api = self._generate_gemini_tts(
                 api_key=api_key,
                 text_input=full_text_input,
+                tts_model=tts_model,
+                speaker_1=speaker_1,
+                speaker_2=speaker_2,
                 temperature=temperature
             )
 

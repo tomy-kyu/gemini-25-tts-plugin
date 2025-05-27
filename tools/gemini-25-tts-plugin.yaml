@@ -54,7 +54,6 @@ parameters:
     human_description:
       en_US: select TTS models
       ja_JP: TTSモデルを選択してください。
-    llm_description: select TTS models
     options:
       - value: gemini-2.5-flash-preview-tts
         label:
@@ -64,7 +63,7 @@ parameters:
         label:
           en_US: Gemini 2.5 Pro Preview TTS
           ja_JP: Gemini 2.5 Pro Preview TTS
-    form: llm
+    form: form
   - name: speaker-1
     type: select
     required: true
@@ -75,7 +74,6 @@ parameters:
     human_description:
       en_US: Select to Speaker model.
       ja_JP: 話者モデルを選択してください。
-    llm_description: select to speaker model.
     options:
       - value: Zephyr
         label:
@@ -197,7 +195,7 @@ parameters:
         label:
           en_US: Knowledgeable voice - man
           ja_JP: 知識人的声 - man
-    form: llm
+    form: form
   - name: speaker-2
     type: select
     required: true
@@ -330,7 +328,7 @@ parameters:
         label:
           en_US: Knowledgeable voice - man
           ja_JP: 知識人的声 - man
-    form: llm
+    form: form
 extra:
   python:
     source: tools/gemini-25-tts-plugin.py
