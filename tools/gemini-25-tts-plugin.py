@@ -40,7 +40,11 @@ class Gemini25TtsPluginTool(Tool):
             yield self.create_text_message("エラー: パラメータ 'scenario_data' (対話データ) が必要です。")
             return
 
-        static_prompt = "Speaker 1 is the moderator, and Speaker 2 is the AI expert.Please interact in a way that is both warm and friendly, yet intellectually stimulating."
+        static_prompt = tool_parameters.get("static_prompt")
+        if not scenario_data:
+            yield self.create_text_message("エラー: パラメータ 'static_prompt' (場面設定、話者設定文) が必要です。")
+            return
+
         # Ensure temperature is float, default to 1.0 if not provided or invalid
         try:
             temperature = float(tool_parameters.get("temperature", 1.0))

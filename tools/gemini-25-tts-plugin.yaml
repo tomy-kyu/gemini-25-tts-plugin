@@ -6,9 +6,9 @@ identity:
     ja_JP: gemini-25-tts-plugin
 description:
   human:
-    en_US: Gemini 2.5 Flash TTS Multi-speaker audio
-    ja_JP: Gemini 2.5 Flash TTS Multi-speaker audio
-  llm: Gemini 2.5 Flash TTS Multi-speaker audio
+    en_US: Gemini 2.5 TTS Multi-speaker audio
+    ja_JP: Gemini 2.5 TTS Multi-speaker audio
+  llm: Gemini 2.5 TTS Multi-speaker audio
 parameters:
   - name: api_key
     type: secret-input
@@ -21,6 +21,7 @@ parameters:
       ja_JP: APIキーを入力してください。
     llm_description: Please enter your API key.
     form: llm
+
   - name: scenario_data
     type: string
     required: true
@@ -32,6 +33,19 @@ parameters:
       ja_JP: 行単位で会話を記述します。会話内容をフォーマットに従い記述します。
     llm_description: Scenario text data for multi-speaker audio .
     form: llm
+
+  - name: static_prompt
+    type: string
+    required: true
+    label: 
+      en_US: static_prompt
+      ja_JP: static_prompt
+    human_description: 
+      en_US: Describe the scene setting, speaker settings, etc.
+      ja_JP: 場面設定、話者設定等の記述を行います。
+    llm_description: Describe the scene setting, speaker settings, etc.
+    form: llm
+
   - name: temperature
     type: number
     required: false
@@ -44,6 +58,7 @@ parameters:
       ja_JP: 温度サンプリング値
     llm_description: Temperature sampling parameters
     form: llm
+
   - name: model
     type: select
     required: true
@@ -64,6 +79,7 @@ parameters:
           en_US: Gemini 2.5 Pro Preview TTS
           ja_JP: Gemini 2.5 Pro Preview TTS
     form: form
+
   - name: speaker-1
     type: select
     required: true

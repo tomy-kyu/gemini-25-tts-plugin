@@ -1,4 +1,4 @@
-version: 0.0.3
+version: 0.1.0
 type: plugin
 author: tomy-kyu
 name: gemini-25-tts-plugin
@@ -18,7 +18,7 @@ plugins:
   tools:
     - provider/gemini-25-tts-plugin.yaml
 meta:
-  version: 0.0.3
+  version: 0.1.0
   arch:
     - amd64
   runner:
@@ -26,6 +26,6 @@ meta:
     version: "3.11"
     entrypoint: main
   minimum_dify_version: null
-created_at: 2025-05-27T08:58:27.396567026+09:00
+created_at: 2025-05-28T08:16:27.396567026+09:00
 privacy: PRIVACY.md
 verified: false
